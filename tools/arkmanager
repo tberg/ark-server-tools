@@ -196,7 +196,8 @@ runAsRoot(){
     echo "Error: steamcmd_user is root; aborting"
     exit 1
   else
-    exec /sbin/runuser "$steamcmd_user" -s "$steamcmd_user_shellexec" -c "$(printf "%q" "$0")$(printf " %q" "$@")"
+    # exec /sbin/runuser "$steamcmd_user" -s "$steamcmd_user_shellexec" -c "$(printf "%q" "$0")$(printf " %q" "$@")"
+    exec su -c "$steamcmd_user_shellexec $(printf "%q" "$0")$(printf " %q" "$@")" "$steamcmd_user"
     exit 1
   fi
 }
